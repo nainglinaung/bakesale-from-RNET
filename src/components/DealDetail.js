@@ -8,6 +8,7 @@ import {
   PanResponder,
   Button,
   Linking,
+  ScrollView,
   Animated,
   Dimensions,
 } from 'react-native';
@@ -81,7 +82,7 @@ function DealDetail({initalDeal, setCurrentDealId}) {
   };
 
   return (
-    <View style={styles.deal}>
+    <ScrollView style={styles.deal}>
       <TouchableOpacity onPress={handlePress}>
         <Text style={styles.back}>Back</Text>
       </TouchableOpacity>
@@ -111,7 +112,7 @@ function DealDetail({initalDeal, setCurrentDealId}) {
         </View>
         <Button title="Buy this deal" onPress={openDealURL} />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -142,6 +143,9 @@ const styles = StyleSheet.create({
     borderStartColor: 'dotted',
     margin: 10,
     padding: 10,
+  },
+  deal: {
+    marginBottom: 20,
   },
 
   user: {

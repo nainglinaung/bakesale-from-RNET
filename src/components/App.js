@@ -26,7 +26,7 @@ const style = StyleSheet.create({
 export default function App() {
   const [deals, setDeals] = useState([]);
   const width = Dimensions.get('window').width / 2 - 75;
-
+  const [activeSearchTerm, setActiveSearchTerm] = useState('');
   const [dealsFromSearch, setDealsFromSearch] = useState([]);
   const [currentDealId, setCurrentDealId] = useState(null);
   const showDeals = dealsFromSearch.length > 0 ? dealsFromSearch : deals;
@@ -35,7 +35,7 @@ export default function App() {
     if (searchText) {
       ajax.fetchDealSearchResult(searchText).then(data => {
         setDealsFromSearch(data);
-        console.log(data);
+        setActiveSearchTerm(searchText);
       });
     } else {
       setDealsFromSearch([]);
@@ -76,7 +76,10 @@ export default function App() {
   if (deals.length > 0) {
     return (
       <View style={style.container}>
-        <SearchBar handleSearch={handleSearch} />
+        <SearchBar
+          handleSearch={handleSearch}
+          initialSearchTerm={activeSearchTerm}
+        />
         <Dealist deals={showDeals} setCurrentDealId={setCurrentDealId} />
       </View>
     );
